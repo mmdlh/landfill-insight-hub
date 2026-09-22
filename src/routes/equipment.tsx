@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { EquipmentPage } from "@/components/monitoring/MonitoringPages";
+export const Route = createFileRoute("/equipment")({ head: () => ({ meta: [{ title: "设备运维｜渗沥液智慧平台" }, { name: "description", content: "设备健康、能耗、运行时长和保养计划集中管理。" }, { property: "og:title", content: "设备运维中心" }, { property: "og:description", content: "降低渗沥液处理关键机组非计划停机风险。" }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: EquipmentPage });

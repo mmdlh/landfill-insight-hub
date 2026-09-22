@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { CollectionPage } from "@/components/monitoring/MonitoringPages";
+export const Route = createFileRoute("/collection")({ head: () => ({ meta: [{ title: "渗沥液收集｜智慧环保平台" }, { name: "description", content: "填埋分区、集液井、泵站和管网实时调度。" }, { property: "og:title", content: "渗沥液收集调度" }, { property: "og:description", content: "监控收集量、液位、压力和泵站状态。" }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: CollectionPage });

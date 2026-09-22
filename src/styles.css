@@ -19,6 +19,9 @@
  */
 
 @theme inline {
+  --font-display: "Space Grotesk", "DM Sans", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-mono: "Space Grotesk", monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -46,6 +49,9 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -62,26 +68,29 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --radius: 0.5rem;
+  --background: oklch(0.948 0.014 215);
+  --foreground: oklch(0.2 0.035 235);
+  --card: oklch(0.99 0.008 190 / 72%);
+  --card-foreground: oklch(0.2 0.035 235);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.51 0.11 210);
+  --primary-foreground: oklch(0.99 0.006 190);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --muted: oklch(0.92 0.018 205);
+  --muted-foreground: oklch(0.45 0.04 225);
+  --accent: oklch(0.68 0.14 180);
+  --accent-foreground: oklch(0.18 0.035 220);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --border: oklch(0.78 0.04 205 / 48%);
+  --input: oklch(0.82 0.03 205);
+  --ring: oklch(0.58 0.12 195);
+  --success: oklch(0.66 0.18 145);
+  --warning: oklch(0.75 0.16 75);
+  --danger: oklch(0.63 0.22 20);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -140,5 +149,44 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-body);
+    min-width: 320px;
   }
 }
+
+@keyframes pulse-dot { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 color-mix(in oklab, var(--success) 35%, transparent); } 50% { opacity: .55; box-shadow: 0 0 0 5px transparent; } }
+@keyframes border-flow { to { background-position: 200% center; } }
+
+@utility font-display { font-family: var(--font-display); }
+@utility font-mono { font-family: var(--font-mono); }
+
+.dashboard-bg { position: relative; background: linear-gradient(145deg, color-mix(in oklab, var(--background) 94%, transparent), color-mix(in oklab, var(--accent) 12%, var(--background))); }
+.dashboard-bg::after { content: ""; position: fixed; inset: 0; z-index: -5; pointer-events: none; background-image: linear-gradient(color-mix(in oklab, var(--primary) 7%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--primary) 7%, transparent) 1px, transparent 1px); background-size: 42px 42px; mask-image: linear-gradient(to bottom, transparent, black 20%, transparent 90%); }
+.glass-panel, .glass-card { background: color-mix(in oklab, var(--card) 72%, transparent); border: 1px solid color-mix(in oklab, var(--primary) 18%, transparent); box-shadow: 0 14px 40px -24px color-mix(in oklab, var(--primary) 45%, transparent), inset 0 1px 0 color-mix(in oklab, white 68%, transparent); backdrop-filter: blur(20px) saturate(130%); }
+.glass-panel { border-radius: var(--radius); }
+.glass-card { position: relative; overflow: hidden; border-radius: var(--radius); padding: 1rem; transition: transform .25s ease, box-shadow .25s ease; }
+.glass-card::before { content: ""; position: absolute; inset: 0 20%; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), var(--success), transparent); background-size: 200% 100%; animation: border-flow 6s linear infinite; opacity: .8; }
+.glass-card:hover { transform: translateY(-3px); box-shadow: 0 22px 44px -24px color-mix(in oklab, var(--primary) 60%, transparent); }
+.stat-card { min-height: 112px; }
+.data-number { font-family: var(--font-display); font-size: clamp(1.55rem, 2.5vw, 2.25rem); font-weight: 700; line-height: 1; color: var(--foreground); text-shadow: 0 5px 18px color-mix(in oklab, var(--primary) 25%, transparent), 0 1px 0 white; }
+.nav-icon { position: relative; display: grid; height: 38px; width: 38px; place-items: center; border-radius: 6px; color: var(--muted-foreground); border: 1px solid color-mix(in oklab, var(--primary) 15%, transparent); background: color-mix(in oklab, white 30%, transparent); transition: .2s ease; }
+.nav-icon:hover, .nav-icon-active { color: var(--primary); background: color-mix(in oklab, var(--primary) 13%, transparent); border-color: color-mix(in oklab, var(--primary) 35%, transparent); transform: translateY(-1px); }
+.glass-pill { display: flex; align-items: center; gap: .5rem; border-radius: 999px; border: 1px solid color-mix(in oklab, var(--primary) 18%, transparent); background: color-mix(in oklab, var(--card) 68%, transparent); padding: .5rem .75rem; font-size: 10px; backdrop-filter: blur(14px); }
+.status-dot { display: inline-block; height: 7px; width: 7px; flex: none; border-radius: 999px; animation: pulse-dot 2s ease-in-out infinite; }
+.status-badge { display: inline-flex; align-items: center; gap: .35rem; white-space: nowrap; border-radius: 999px; padding: .2rem .45rem; font-size: 10px; font-weight: 600; }
+.status-success { color: color-mix(in oklab, var(--success) 75%, var(--foreground)); background: color-mix(in oklab, var(--success) 12%, transparent); }
+.status-warning { color: color-mix(in oklab, var(--warning) 75%, var(--foreground)); background: color-mix(in oklab, var(--warning) 14%, transparent); }
+.status-danger { color: var(--danger); background: color-mix(in oklab, var(--danger) 11%, transparent); }
+.status-primary { color: var(--primary); background: color-mix(in oklab, var(--primary) 11%, transparent); }
+.data-table { width: 100%; min-width: 720px; border-collapse: collapse; text-align: left; font-size: 11px; }
+.data-table th { padding: .6rem .75rem; color: var(--primary); font-size: 9px; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+.data-table td { padding: .65rem .75rem; border-bottom: 1px solid color-mix(in oklab, var(--border) 55%, transparent); }
+.data-table tr:last-child td { border-bottom: 0; }
+.data-table tbody tr:hover { background: color-mix(in oklab, var(--primary) 5%, transparent); }
+.compliance-ring { display: grid; width: 142px; height: 142px; place-items: center; border-radius: 50%; background: conic-gradient(var(--success) 0 98.6%, color-mix(in oklab, var(--primary) 10%, transparent) 98.6%); box-shadow: 0 0 30px color-mix(in oklab, var(--success) 20%, transparent); }
+.compliance-ring > div { display: grid; width: 108px; height: 108px; place-content: center; border-radius: 50%; background: color-mix(in oklab, var(--card) 92%, white); text-align: center; }
+.compliance-ring strong { font-family: var(--font-display); font-size: 1.65rem; }.compliance-ring span { font-size: 9px; color: var(--muted-foreground); }
+.process-node { position: relative; display: flex; min-height: 112px; flex-direction: column; align-items: center; justify-content: center; gap: .3rem; border-radius: 6px; border: 1px solid color-mix(in oklab, var(--primary) 18%, transparent); background: color-mix(in oklab, var(--primary) 5%, transparent); text-align: center; }
+.process-node > span { position: absolute; left: 7px; top: 5px; font-family: var(--font-mono); font-size: 8px; color: var(--muted-foreground); }.process-node strong { font-size: 11px; }.process-node small { color: var(--success); }.process-node i { position: absolute; right: -11px; z-index: 2; width: 18px; height: 1px; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+@media (max-width: 640px) { .nav-icon { width: 32px; height: 34px; }.glass-panel { padding-inline: .35rem; }.glass-card { padding: .8rem; }.process-node i { display: none; } }
+@media (prefers-reduced-motion: reduce) { .glass-card::before, .status-dot { animation: none; }.glass-card { transition: none; } }

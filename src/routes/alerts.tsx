@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { AlertsPage } from "@/components/monitoring/MonitoringPages";
+export const Route = createFileRoute("/alerts")({ head: () => ({ meta: [{ title: "预警管理｜渗沥液智慧平台" }, { name: "description", content: "渗沥液水质、液位、压力与设备异常闭环处置。" }, { property: "og:title", content: "智慧环保预警管理中心" }, { property: "og:description", content: "按风险等级跟踪预警确认、处置与复归。" }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: AlertsPage });

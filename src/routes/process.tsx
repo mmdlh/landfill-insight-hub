@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { ProcessPage } from "@/components/monitoring/MonitoringPages";
+export const Route = createFileRoute("/process")({ head: () => ({ meta: [{ title: "处理工艺｜渗沥液智慧平台" }, { name: "description", content: "预处理、生化、膜处理与达标排放全流程监控。" }, { property: "og:title", content: "渗沥液处理工艺监控" }, { property: "og:description", content: "实时掌握处理能力、关键参数和自动控制记录。" }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: ProcessPage });
