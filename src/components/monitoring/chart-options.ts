@@ -20,7 +20,7 @@ export function lineOption(labels: string[], series: Array<{ name: string; data:
   return {
     color: colors,
     tooltip,
-    legend: { top: 8, right: 8, textStyle: { color, fontSize: 10 } },
+    legend: { top: 8, right: 8, textStyle: { color: text, fontSize: 10 } },
     grid: { left: 42, right: 18, top: 48, bottom: 28 },
     xAxis: { type: "category", data: labels, boundaryGap: false, axisLine: { lineStyle: { color: grid } }, axisLabel: { color: text, fontSize: 10 } },
     yAxis: { type: "value", splitLine: { lineStyle: { color: grid } }, axisLabel: { color: text, fontSize: 10 } },
