@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { WaterQualityPage } from "@/components/monitoring/MonitoringPages";
+export const Route = createFileRoute("/water-quality")({ head: () => ({ meta: [{ title: "水质监测｜渗沥液智慧平台" }, { name: "description", content: "渗沥液进出水污染物指标与排放达标分析。" }, { property: "og:title", content: "水质监测中心" }, { property: "og:description", content: "实时分析 COD、氨氮、总氮及排放合规状态。" }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: WaterQualityPage });
