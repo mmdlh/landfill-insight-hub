@@ -18,17 +18,17 @@ export function DashboardShell({ children }: { children: ReactNode }) {
     <div className="dashboard-bg min-h-screen text-foreground">
       <img src={facilityBackground} alt="生态环绕的渗沥液处理设施" width={1920} height={1088} className="fixed inset-0 -z-20 h-full w-full object-cover opacity-30" />
       <div className="fixed inset-0 -z-10 bg-background/76 backdrop-blur-[2px]" />
-      <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 lg:px-6">
-        <div className="glass-panel mx-auto grid h-[74px] max-w-[1500px] grid-cols-[1fr_auto_1fr] items-center px-3 sm:px-5">
-          <nav className="flex justify-start gap-1.5">
-            {nav.slice(0, 3).map((item) => <NavIcon key={item.to} {...item} active={pathname === item.to} />)}
+      <header className="fixed inset-x-0 top-0 z-50 px-2 pt-3 lg:px-6">
+        <div className="glass-panel mx-auto flex h-[74px] max-w-[1500px] items-center justify-between gap-2 px-2.5 sm:px-4">
+          <nav className="flex items-center gap-1 sm:gap-1.5">
+            {nav.slice(0, 3).map((item) => <NavItem key={item.to} {...item} active={pathname === item.to} />)}
           </nav>
-          <div className="px-2 text-center">
-            <h1 className="font-display text-[clamp(14px,2.1vw,25px)] font-bold text-primary">垃圾填埋场渗沥液智慧平台</h1>
-            <p className="hidden text-[10px] text-muted-foreground sm:block">LEACHATE SMART ENVIRONMENTAL PLATFORM</p>
+          <div className="px-1 text-center sm:px-2">
+            <h1 className="font-display text-[clamp(13px,1.8vw,23px)] font-bold text-primary">垃圾填埋场渗沥液智慧平台</h1>
+            <p className="hidden text-[10px] text-muted-foreground lg:block">LEACHATE SMART ENVIRONMENTAL PLATFORM</p>
           </div>
-          <nav className="flex justify-end gap-1.5">
-            {nav.slice(3).map((item) => <NavIcon key={item.to} {...item} active={pathname === item.to} />)}
+          <nav className="flex items-center justify-end gap-1 sm:gap-1.5">
+            {nav.slice(3).map((item) => <NavItem key={item.to} {...item} active={pathname === item.to} />)}
           </nav>
         </div>
       </header>
@@ -37,11 +37,11 @@ export function DashboardShell({ children }: { children: ReactNode }) {
   );
 }
 
-function NavIcon({ to, label, icon: Icon, active }: (typeof nav)[number] & { active: boolean }) {
+function NavItem({ to, label, icon: Icon, active }: (typeof nav)[number] & { active: boolean }) {
   return (
-    <Link to={to} title={label} aria-label={label} className={`nav-icon group ${active ? "nav-icon-active" : ""}`}>
-      <Icon className="size-4" strokeWidth={1.8} />
-      <span className="pointer-events-none absolute top-[calc(100%+9px)] hidden whitespace-nowrap rounded bg-foreground px-2 py-1 text-[10px] text-background shadow-lg group-hover:block">{label}</span>
+    <Link to={to} aria-label={label} className={`nav-icon group ${active ? "nav-icon-active" : ""}`}>
+      <Icon className="size-4 flex-none" strokeWidth={1.8} />
+      <span className="nav-icon-label">{label}</span>
     </Link>
   );
 }
