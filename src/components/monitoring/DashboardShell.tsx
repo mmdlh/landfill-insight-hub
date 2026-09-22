@@ -60,9 +60,12 @@ export function Panel({ title, subtitle, children, className = "", action }: { t
 }
 
 export function StatCard({ label, value, unit, trend, tone = "primary", icon: Icon }: { label: string; value: string; unit?: string; trend: string; tone?: "primary" | "success" | "warning" | "danger"; icon?: typeof Gauge }) {
-  return <article className="glass-card stat-card"><div className="flex items-center justify-between"><span className="text-[11px] text-muted-foreground">{label}</span>{Icon && <Icon className={`size-4 text-${tone}`} />}</div><p className="data-number mt-2">{value}<span className="ml-1 text-xs font-medium text-muted-foreground">{unit}</span></p><p className={`mt-1 text-[10px] font-medium text-${tone}`}>{trend}</p></article>;
+  const toneClass = { primary: "text-primary", success: "text-success", warning: "text-warning", danger: "text-danger" }[tone];
+  return <article className="glass-card stat-card"><div className="flex items-center justify-between"><span className="text-[11px] text-muted-foreground">{label}</span>{Icon && <Icon className={`size-4 ${toneClass}`} />}</div><p className="data-number mt-2">{value}<span className="ml-1 text-xs font-medium text-muted-foreground">{unit}</span></p><p className={`mt-1 text-[10px] font-medium ${toneClass}`}>{trend}</p></article>;
 }
 
 export function StatusBadge({ children, tone = "success" }: { children: ReactNode; tone?: "success" | "warning" | "danger" | "primary" }) {
-  return <span className={`status-badge status-${tone}`}><span className={`status-dot bg-${tone}`} />{children}</span>;
+  const toneClass = { primary: "status-primary", success: "status-success", warning: "status-warning", danger: "status-danger" }[tone];
+  const dotClass = { primary: "bg-primary", success: "bg-success", warning: "bg-warning", danger: "bg-danger" }[tone];
+  return <span className={`status-badge ${toneClass}`}><span className={`status-dot ${dotClass}`} />{children}</span>;
 }
